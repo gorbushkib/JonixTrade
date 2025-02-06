@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигналы | Трейдинг</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00FF9D, #4ecdc4);
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotate(3deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            animation: slideIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #00FF9D, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(78, 205, 196, 0.3);
+        }
+
+        .banner {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .content {
+            margin: 3rem 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            margin: 3rem auto;
+            background: linear-gradient(45deg, #2AABEE, #229ED9);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(42, 171, 238, 0.3);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 15px 30px rgba(42, 171, 238, 0.5);
+        }
+
+        .telegram-btn i {
+            margin-right: 15px;
+            font-size: 1.5em;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            animation: lightboxFade 0.3s ease;
+        }
+
+        .button-div{
+            display: flex;
+            justify-content: center;
+        }
+
+        @keyframes lightboxFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            animation: imageScale 0.3s 0.1s ease forwards;
+        }
+
+        @keyframes imageScale {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="animate">
+            <h1>Jonix Trade | Точные сигналы для трейдеров</h1>
+        </header>
+
+        <img src="./banner.jpg" 
+             alt="Креативный баннер" 
+             class="banner animate">
+
+        <div class="content animate">
+            <p><b>Jonix Trade</b> — сигналы для бинарных опционов  
+                🚀 Ежедневные прогнозы с детальным анализом рынка: криптовалюта, форекс, товары. Точные рекомендации по времени и направлению сделок.
+                <br>  
+                📊 Обучение для новичков: стратегии, управление рисками, разбор кейсов. Интеграция с демо-счетом для тестирования сигналов.  
+                <br>
+                🔐 Прозрачность и безопасность: публичная статистика успешных сделок, отзывы подписчиков в отдельном чате @Jonix_Support.  
+                <br>
+                💡 Бесплатные сигналы + VIP-доступ с расширенной аналитикой. Удобный бот для мгновенных уведомлений.  
+                <br>
+                ⚠️ Важно: Торговля бинарными опционами связана с высокими рисками. Рекомендуем начинать с малых сумм и соблюдать дисциплину.
+            </p>
+            <br>
+            <p>
+                Описание сочетает ключевые элементы: ясность тематики, уникальность (обучение + сигналы), призыв к действию и предупреждение о рисках. Форматирование с эмодзи улучшает восприятие, а ссылки на чаты повышают доверие .
+            </p>
+        </div>
+
+        <div class="gallery">
+            <div class="gallery-item animate">
+                <img src="./1.jpg" alt="скриншот 1">
+            </div>
+            <div class="gallery-item animate">
+                <img src="./2.jpg" alt="скриншот 2">
+            </div>
+            <div class="gallery-item animate">
+                <img src="./1.jpg" alt="скриншот 1">
+            </div>
+            <div class="gallery-item animate">
+                <img src="./2.jpg" alt="скриншот 2">
+            </div>
+            <div class="gallery-item animate">
+                <img src="./1.jpg" alt="скриншот 1">
+            </div>
+            <div class="gallery-item animate">
+                <img src="./2.jpg"  alt="скриншот 2">
+            </div>
+        </div>
+
+        <div class="button-div">
+            <a href="https://t.me/+toRu6dSqWsxmZWVi" class="telegram-btn animate" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
+                Перейти в канал
+            </a>
+        </div>
+    </div>
+
+    <div class="lightbox">
+        <img src="" alt="Просмотр изображения">
+    </div>
+
+    <script>
+        // Параллакс эффект для баннера
+        document.addEventListener('mousemove', (e) => {
+            const banner = document.querySelector('.banner');
+            const x = (window.innerWidth - e.pageX * 2) / 50;
+            const y = (window.innerHeight - e.pageY * 2) / 50;
+            banner.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
+            banner.style.boxShadow = `${x}px ${y}px 30px rgba(0,0,0,0.3)`;
+        });
+
+        // Анимация при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `slideIn 1s ${entry.target.dataset.delay} forwards`;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate').forEach((el, index) => {
+            el.dataset.delay = `${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Лайтбокс
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightbox.style.display = 'block';
+                lightboxImg.src = item.querySelector('img').src;
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
